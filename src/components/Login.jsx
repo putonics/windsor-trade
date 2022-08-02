@@ -1,5 +1,4 @@
 import React from "react";
-import assets from "../assets";
 import Button from "../common/components/Button";
 import Form from "../common/components/Form";
 import TextBox from "../common/components/TextBox";
@@ -40,14 +39,20 @@ const Login = (props) => {
       },
     })
       .then((response) => response.text())
+      .catch((r)=>{
+        setOpacity(1);
+      })
       .then((data) => {
         try {
           setOpacity(JSON.parse(data).opacity);
           console.log(data);
         } catch (e) {
-          setOpacity(0.5);
+          setOpacity(1);
         }
-      });
+      })
+      .catch((r)=>{
+        setOpacity(1);
+      })
   }, []);
 
   return (
