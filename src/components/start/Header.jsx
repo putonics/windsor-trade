@@ -20,7 +20,18 @@ const Menu = (props) => (
 const MENU = ["Welcome", "About", "Plans", "Team"]
 
 const Header = (props) => {
-  const [menu, setMenu] = React.useState()
+  const [menu, setMenu] = React.useState(props.menu)
+
+  React.useEffect(() => {
+    if (menu !== props.menu) {
+      setMenu(props.menu)
+    }
+  }, [props])
+  React.useEffect(() => {
+    if (menu !== props.menu) {
+      props.onChange(menu)
+    }
+  }, [menu])
 
   return (
     <div className="z-50 text-center text-white/80 bg-black/25 hover:bg-black/40 cursor-pointer backdrop-blur-xl fixed top-0 right-0 left-0 border-b-2 border-b-white/10">

@@ -4,7 +4,9 @@ const About = (props) => {
   return (
     <div
       tabIndex={0}
-      onLoad={props.onLoad}
+      onFocus={props.onActive}
+      onMouseOver={props.onActive}
+      onPointerEnter={props.onActive}
       id="About"
       className="h-screen text-center text-2xl"
     >
