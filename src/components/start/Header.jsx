@@ -1,7 +1,7 @@
 import React from "react"
 
 const Menu = (props) => (
-  <div onClick={props?.onClick} className="block">
+  <a href={props.link} onClick={props?.onClick} className="block">
     <div className="hover:text-white p-2 w-fit flex gap-1">
       {props.active ? (
         <div className="border-r-white/90 rounded-full border-r-2 animate-pulse">
@@ -14,22 +14,28 @@ const Menu = (props) => (
       )}
       {props.children}
     </div>
-  </div>
+  </a>
 )
 
-const MENU = ["Home", "About", "Plans", "Team", "Signin"]
+const MENU = ["Welcome", "About", "Plans", "Team"]
 
 const Header = (props) => {
   const [menu, setMenu] = React.useState()
 
   return (
-    <div className="text-center text-white/80 bg-black/25 hover:bg-black/40 cursor-pointer backdrop-blur-xl fixed top-0 right-0 left-0 border-b-2 border-b-white/10">
-      <div className="flex justify-center gap-1 md:gap-10">
+    <div className="z-50 text-center text-white/80 bg-black/25 hover:bg-black/40 cursor-pointer backdrop-blur-xl fixed top-0 right-0 left-0 border-b-2 border-b-white/10">
+      <div className="flex justify-center gap-1 md:gap-20">
         {MENU.map((m) => (
-          <Menu key={m} onClick={() => setMenu(m)} active={m === menu}>
+          <Menu
+            key={m}
+            onClick={() => setMenu(m)}
+            active={m === menu}
+            link={`#${m}`}
+          >
             {m}
           </Menu>
         ))}
+        <Menu link="/login">Signin</Menu>
       </div>
     </div>
   )

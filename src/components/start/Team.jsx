@@ -1,0 +1,16 @@
+import React from "react"
+
+const Team = (props) => {
+  return (
+    <div
+      tabIndex={0}
+      onLoad={props.onLoad}
+      id="Team"
+      className="h-screen text-center text-2xl"
+    >
+      <div className="flex justify-center items-center h-full">Team</div>
+    </div>
+  )
+}
+
+export default Team
