@@ -5,17 +5,27 @@ import Plans from "./Plans"
 import Team from "./Team"
 import Welcome from "./Welcome"
 
+export const MENU = ["Welcome", "About", "Plans", "Team"]
+
 const Home = (props) => {
   const [menu, setMenu] = React.useState("Welcome")
 
   return (
-    <div className="bg-gradient-to-r from-indigo-900 to-slate-900 relative text-white">
+    <div
+      tabIndex={0}
+      onScroll={(e) =>
+        setMenu(
+          MENU[Math.ceil(e.currentTarget.scrollTop / window.screen.height)]
+        )
+      }
+      className="h-screen overflow-y-auto bg-gradient-to-r from-indigo-900 to-slate-900 relative text-white"
+    >
       <Header menu={menu} onChange={setMenu} />
       <div className="relative">
-        <Welcome onActive={(e) => setMenu("Welcome")} />
-        <About onActive={(e) => setMenu("About")} />
-        <Plans onActive={(e) => setMenu("Plans")} />
-        <Team onActive={(e) => setMenu("Team")} />
+        <Welcome />
+        <About />
+        <Plans />
+        <Team />
       </div>
     </div>
   )
