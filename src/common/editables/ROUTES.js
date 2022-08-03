@@ -12,9 +12,15 @@ import AddPackage from "../../components/package/AddPackage"
 import PrivacyPolicies from "../../components/privacy-policies/PrivacyPolicies"
 import TermsAndConditions from "../../components/privacy-policies/TermsAndConditions"
 import WithdrawalForm from "../../components/withdrawal/WithdrawalForm"
+import Home from "../../components/start/Home"
 export default [
     {
         path: "/",
+        element: <Home />,
+        auth: false
+    },
+    {
+        path: "/login",
         element: <Login />,
         auth: false
     },
