@@ -35,7 +35,7 @@ const Menu = (props) => {
   return (
     <a href={props.link} onClick={props?.onClick} className="block">
       <div
-        className="hover:text-white p-2 w-fit flex gap-1"
+        className="hover:text-white p-2 w-fit flex gap-1 text-sm md:text-base"
         style={
           next === props.children
             ? { animation: "textGlow 600ms ease-in-out" }
@@ -82,7 +82,7 @@ const Header = (props) => {
 
   React.useEffect(() => setMenuEffect(props.menu), [props])
   React.useEffect(() => {
-    console.log(JSON.stringify(menu))
+    // console.log(JSON.stringify(menu))
     if (menu.next !== props.menu) {
       props.onChange(menu.next)
     }
@@ -101,9 +101,12 @@ const Header = (props) => {
             {m}
           </Menu>
         ))}
-        <Menu link="/login" menu={menu}>
-          Signin
-        </Menu>
+
+        <div className="text-blue-500">
+          <Menu link="/login" menu={menu}>
+            Login
+          </Menu>
+        </div>
       </div>
     </div>
   )
