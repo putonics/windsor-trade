@@ -18,6 +18,12 @@ export default {
     wallet: require('./wallet.png'),
     profit: require('./profit.png'),
     //////////////////////////////////////
+    clogo1: require('./featured/c-logo-1.png'),
+    clogo2: require('./featured/c-logo-2.png'),
+    clogo3: require('./featured/c-logo-3.png'),
+    clogo4: require('./featured/c-logo-4.png'),
+    clogo5: require('./featured/c-logo-5.png'),
+    //////////////////////////////////////
     rewards: [
         { matching: 1000, title: 'Body massager', url: require('./rewards/massager.png') },
         { matching: 2500, title: 'Rice cooker', url: require('./rewards/ricecooker.png') },

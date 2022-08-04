@@ -10,8 +10,15 @@ const About = (props) => {
       <div className="flex flex-col gap-4 md:p-10 p-4 justify-center items-center h-full">
         <div className="text-3xl font-extrabold">About</div>
         <div className="text-base text-slate-700 text-justify">
-          WINDSOR is a token based on BEP20 Smart Contracts which is open source
-          and immutable and is executing on Binance Smart Chain. It is an
+          WINDSOR (
+          <a
+            className="italic text-sm text-indigo-900"
+            href="https://www.google.com/search?q=windsorcryptocoin"
+          >
+            windsorcryptocoin.com
+          </a>
+          ) is a token based on BEP20 Smart Contracts which is open source and
+          immutable and is executing on Binance Smart Chain. It is an
           experimental digital currency that enables instant payments to anyone,
           anywhere in the world. WINDSOR is completely decentralized. It uses
           peer-to-peer technology to operate with no central authority: managing
