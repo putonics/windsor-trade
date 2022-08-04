@@ -1,6 +1,5 @@
 import React from "react"
 import Lottie from "react-lottie"
-import assets from "../../assets"
 import animationData from "../../assets/lottie-animations/103226-crypto-phone.json"
 
 const Welcome = (props) => {
@@ -34,19 +33,19 @@ const Welcome = (props) => {
           </div>
           <div></div>
         </div>
-        <div className="flex justify-center items-center h-full p-10">
-          <Lottie
-            options={{
-              loop: true,
-              autoplay: true,
-              animationData: animationData,
-              rendererSettings: {
-                preserveAspectRatio: "xMidYMid meet",
-              },
-            }}
-            height="auto"
-            width="100%"
-          />
+        <div className="flex justify-center items-center h-full px-10 py-4">
+          <div className="max-w-lg max-h-max">
+            <Lottie
+              options={{
+                loop: true,
+                autoplay: true,
+                animationData: animationData,
+                rendererSettings: {
+                  preserveAspectRatio: "none",
+                },
+              }}
+            />
+          </div>
         </div>
       </div>
     </div>
