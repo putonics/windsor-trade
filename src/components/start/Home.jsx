@@ -2,10 +2,10 @@ import React from "react"
 import About from "./About"
 import Header from "./Header"
 import Plans from "./Plans"
-import Team from "./Team"
+import Contacts from "./Contacts"
 import Welcome from "./Welcome"
 
-export const MENU = ["Welcome", "About", "Plans", "Team"]
+export const MENU = ["Welcome", "About", "Plans", "Contacts"]
 
 const Home = (props) => {
   const [menu, setMenu] = React.useState("")
@@ -15,7 +15,9 @@ const Home = (props) => {
       tabIndex={0}
       onScroll={(e) =>
         setMenu(
-          MENU[Math.round(e.currentTarget.scrollTop / window.screen.height)]
+          MENU[
+            Math.round(e.currentTarget.scrollTop / window.screen.height + 0.1)
+          ]
         )
       }
       onLoad={(e) => setMenu("Welcome")}
@@ -26,7 +28,7 @@ const Home = (props) => {
         <Welcome />
         <About />
         <Plans />
-        <Team />
+        <Contacts />
       </div>
     </div>
   )
