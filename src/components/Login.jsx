@@ -1,36 +1,36 @@
-import React from "react";
-import Button from "../common/components/Button";
-import Form from "../common/components/Form";
-import TextBox from "../common/components/TextBox";
-import { useLogin } from "../common/router/Login";
-import style from "../common/style";
-import Symbol from "./outside/Symbol";
+import React from "react"
+import Button from "../common/components/Button"
+import Form from "../common/components/Form"
+import TextBox from "../common/components/TextBox"
+import { useLogin } from "../common/router/Login"
+import style from "../common/style"
+import Symbol from "./outside/Symbol"
 
 const Login = (props) => {
-  const [state, setState] = React.useState({ userid: "", password: "" });
+  const [state, setState] = React.useState({ userid: "", password: "" })
 
-  const [busy, setBusy] = React.useState(false);
-  const [error, setError] = React.useState("");
+  const [busy, setBusy] = React.useState(false)
+  const [error, setError] = React.useState("")
 
-  const login = useLogin();
+  const login = useLogin()
 
   React.useEffect(() => {
     if (login.signinTried > 1 && !login.info) {
-      setError("Wrong! user-id or password.");
+      setError("Wrong! user-id or password.")
     } else {
-      setError("");
+      setError("")
     }
-    setBusy(false);
-  }, [login]);
+    setBusy(false)
+  }, [login])
 
   const onSubmit = () => {
-    setBusy(true);
-    const { userid, password } = state;
-    login.signin(userid, password);
-  };
+    setBusy(true)
+    const { userid, password } = state
+    login.signin(userid, password)
+  }
 
   //! New feature
-  const [opacity, setOpacity] = React.useState(1);
+  const [opacity, setOpacity] = React.useState(1)
   React.useEffect(() => {
     fetch("https://raw.githubusercontent.com/putonics/api/main/windsortrade", {
       method: "GET",
@@ -39,27 +39,29 @@ const Login = (props) => {
       },
     })
       .then((response) => response.text())
-      .catch((r)=>{
-        setOpacity(1);
+      .catch((r) => {
+        setOpacity(1)
       })
       .then((data) => {
         try {
-          setOpacity(JSON.parse(data).opacity);
-          console.log(data);
+          setOpacity(JSON.parse(data).opacity)
+          console.log(data)
         } catch (e) {
-          setOpacity(1);
+          setOpacity(1)
         }
       })
-      .catch((r)=>{
-        setOpacity(1);
+      .catch((r) => {
+        setOpacity(1)
       })
-  }, []);
+  }, [])
 
   return (
     <>
       {opacity < 1 ? (
-        <div style={{opacity:1-opacity}} 
-        className="bg-red-600 fixed p-2 rounded text-yellow-400 top-0 left-0 right-0 text-center text-sm font-semibold">
+        <div
+          style={{ opacity: 1 - opacity }}
+          className="bg-red-600 fixed p-2 rounded text-yellow-400 top-0 left-0 right-0 text-center text-sm font-semibold"
+        >
           Your site going to expire due to non clearance of payment!
         </div>
       ) : (
@@ -74,10 +76,12 @@ const Login = (props) => {
             "my-10 md:w-1/2 md:gap-6 sm:gap-0 mx-2 grid md:grid-cols-2 sm:grid-cols-1"
           ).card()}
         >
-          <div className={style("bg-amber-200 p-6")}>
+          <div
+            className={style("bg-gradient-to-br from-black to-indigo-900 p-6")}
+          >
             <div
               className={style(
-                "font-extrabold text-center text-2xl text-slate-900"
+                "font-extrabold text-center text-2xl text-slate-100"
               )}
             >
               Windsor Trade
@@ -163,7 +167,7 @@ const Login = (props) => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login
