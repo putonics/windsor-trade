@@ -24,7 +24,7 @@ const WalletCard = (props) => {
             const pdt = new Date(p.date)
             const pym = pdt.getFullYear() * 12 + pdt.getMonth()
             const diff = tym - pym
-            sum += p.amount * 0.02 * diff
+            sum += p.amount * 0.04 * diff
           })
           setRoi(sum)
         }

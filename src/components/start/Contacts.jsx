@@ -20,9 +20,7 @@ const Contacts = (props) => {
                 0x02D57f6c8a307CF8750D9eDA4a45b2F66c78655f
               </div>
               <p>
-                BANDAR MAKOTA CHERAS 43200 SELANGOR D.E, MALAYSIA
-                <br />
-                CONTACT: +60 11-1658-2663
+                Al Maktoum Rd - Deira - Dubai - United Arab Emirates
                 <br />
                 Email Id: team@windsorcryptocoin.com
                 <br />
