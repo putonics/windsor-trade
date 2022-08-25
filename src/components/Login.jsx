@@ -115,14 +115,24 @@ const Login = (props) => {
                   value={state.password}
                   onChange={(password) => setState({ ...state, password })}
                 />
-                <div className={style("flex justify-end")}>
+                <div className={style("flex justify-between items-center")}>
+                  <div className="flex-1 text-center tracking-wide">
+                    <a
+                      href="/forgot-password"
+                      className="text-sm text-blue-900"
+                    >
+                      Forgot password
+                    </a>
+                  </div>
                   <Button disabled={busy} color="indigo" type="submit">
                     Sign in
                   </Button>
                 </div>
               </div>
             </Form>
-            <div className="text-red-700">{error}</div>
+            <div className="bg-red-400 m-1 rounded-md text-center text-sm text-red-700 animate-pulse">
+              {error}
+            </div>
           </div>
         </div>
         <div className="flex flex-wrap justify-center">

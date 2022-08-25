@@ -13,67 +13,73 @@ import PrivacyPolicies from "../../components/privacy-policies/PrivacyPolicies"
 import TermsAndConditions from "../../components/privacy-policies/TermsAndConditions"
 import WithdrawalForm from "../../components/withdrawal/WithdrawalForm"
 import Home from "../../components/start/Home"
+import ForgotPassword from "../../components/ForgotPassword"
 export default [
-    {
-        path: "/",
-        element: <Home />,
-        auth: false
-    },
-    {
-        path: "/login",
-        element: <Login />,
-        auth: false
-    },
-    {
-        path: "/signup/:refdocid",
-        element: <Signup />,
-        auth: false
-    },
-    {
-        path: "/dash",
-        element: <Dash />,
-        title: 'Dashboard',
-        icon: 'chart-line',
-        auth: true
-    },
-    {
-        path: "/package/:amount",
-        element: <AddPackage />,
-        auth: true
-    },
-    {
-        path: "/profile",
-        element: <Profile />,
-        title: 'Profile',
-        icon: 'user',
-        auth: true
-    },
-    {
-        path: "/members/:docid",
-        element: <Members />,
-        title: 'Members',
-        icon: 'people-line',
-        auth: true
-    },
-    {
-        path: "/terms",
-        element: <TermsAndConditions />,
-        title: 'Terms & Conditions',
-        icon: 'screwdriver-wrench',
-        auth: true
-    },
-    {
-        path: "/withdrawal",
-        element: <WithdrawalForm />,
-        auth: true
-    },
-    {
-        path: "/privacy-policies",
-        element: <PrivacyPolicies />,
-    },
-    {
-        path: '/*',
-        element: <PageNotFound />,
-        auth: false
-    }
+  {
+    path: "/",
+    element: <Home />,
+    auth: false,
+  },
+  {
+    path: "/forgot-password",
+    element: <ForgotPassword />,
+    auth: false,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+    auth: false,
+  },
+  {
+    path: "/signup/:refdocid",
+    element: <Signup />,
+    auth: false,
+  },
+  {
+    path: "/dash",
+    element: <Dash />,
+    title: "Dashboard",
+    icon: "chart-line",
+    auth: true,
+  },
+  {
+    path: "/package/:amount",
+    element: <AddPackage />,
+    auth: true,
+  },
+  {
+    path: "/profile",
+    element: <Profile />,
+    title: "Profile",
+    icon: "user",
+    auth: true,
+  },
+  {
+    path: "/members/:docid",
+    element: <Members />,
+    title: "Members",
+    icon: "people-line",
+    auth: true,
+  },
+  {
+    path: "/terms",
+    element: <TermsAndConditions />,
+    title: "Terms & Conditions",
+    icon: "screwdriver-wrench",
+    auth: true,
+  },
+  {
+    path: "/withdrawal",
+    element: <WithdrawalForm />,
+    auth: true,
+  },
+  {
+    path: "/privacy-policies",
+    element: <PrivacyPolicies />,
+  },
+  {
+    path: "/*",
+    element: <PageNotFound />,
+    auth: false,
+  },
 ]
