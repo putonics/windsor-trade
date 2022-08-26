@@ -1,5 +1,4 @@
 import React from "react"
-import { useNavigate } from "react-router-dom"
 import Button from "../../common/components/Button"
 import Form from "../../common/components/Form"
 import Select from "../../common/components/Select"
@@ -48,8 +47,6 @@ const Profile = (props) => {
   })
 
   React.useEffect(() => setError(""), [state])
-
-  const navigate = useNavigate()
 
   const confirm = useConfirm()
   const otpConfirm = useOTPConfirm()
@@ -150,19 +147,27 @@ const Profile = (props) => {
               />
               <TextBox
                 required
-                disabled={busy}
+                disabled={busy || login.info.loginBy !== "ADMIN"}
                 label="Name"
                 type="text"
                 value={state.name}
-                onChange={(name) => setState({ ...state, name })}
+                onChange={(name) => {
+                  if (!busy && login.info.loginBy === "ADMIN") {
+                    setState({ ...state, name })
+                  }
+                }}
               />
               <TextBox
                 required
-                disabled={busy}
+                disabled={busy || login.info.loginBy !== "ADMIN"}
                 label="Email"
                 type="email"
                 value={state.email}
-                onChange={(email) => setState({ ...state, email })}
+                onChange={(email) => {
+                  if (!busy && login.info.loginBy === "ADMIN") {
+                    setState({ ...state, email })
+                  }
+                }}
               />
               <TextBox
                 required
@@ -178,7 +183,7 @@ const Profile = (props) => {
             <div className="p-6">
               <Select
                 required
-                disabled={busy}
+                disabled={busy || login.info.loginBy !== "ADMIN"}
                 label="Live in"
                 type="text"
                 value={state.countrycode}
@@ -186,7 +191,11 @@ const Profile = (props) => {
                   label: c.name,
                   value: c.code,
                 }))}
-                onChange={(countrycode) => setState({ ...state, countrycode })}
+                onChange={(countrycode) => {
+                  if (!busy && login.info.loginBy === "ADMIN") {
+                    setState({ ...state, countrycode })
+                  }
+                }}
               />
               <div className="p-1 flex flex-row justify-center items-center">
                 <img
@@ -204,44 +213,69 @@ const Profile = (props) => {
               </div>
               <TextBox
                 required
-                disabled={busy}
+                disabled={busy || login.info.loginBy !== "ADMIN"}
                 label="Mobile no."
                 type="text"
                 value={state.mobile}
-                onChange={(mobile) => setState({ ...state, mobile })}
+                onChange={(mobile) => {
+                  if (!busy && login.info.loginBy === "ADMIN") {
+                    setState({ ...state, mobile })
+                  }
+                }}
               />
               <TextBox
                 required
-                disabled={busy || login?.info?.idproof?.name}
+                disabled={
+                  busy ||
+                  (Boolean(login?.info?.idproof?.name) &&
+                    login.info.loginBy !== "ADMIN")
+                }
                 label="Id proof name"
                 type="text"
                 value={state.idproof.name}
-                onChange={(name) =>
-                  setState({ ...state, idproof: { ...state.idproof, name } })
-                }
+                onChange={(name) => {
+                  if (!busy && login.info.loginBy === "ADMIN") {
+                    setState({ ...state, idproof: { ...state.idproof, name } })
+                  }
+                }}
               />
               <TextBox
                 required
-                disabled={busy || login?.info?.idproof?.number}
+                disabled={
+                  busy ||
+                  (Boolean(login?.info?.idproof?.number) &&
+                    login.info.loginBy !== "ADMIN")
+                }
                 label="Id proof number"
                 type="text"
                 value={state.idproof.number}
-                onChange={(number) =>
-                  setState({ ...state, idproof: { ...state.idproof, number } })
-                }
+                onChange={(number) => {
+                  if (!busy && login.info.loginBy === "ADMIN") {
+                    setState({
+                      ...state,
+                      idproof: { ...state.idproof, number },
+                    })
+                  }
+                }}
               />
               <TextBox
                 required
-                disabled={busy || login?.info?.idproof?.issuingAuthority}
+                disabled={
+                  busy ||
+                  (Boolean(login?.info?.idproof?.issuingAuthority) &&
+                    login.info.loginBy !== "ADMIN")
+                }
                 label="Id proof issuing AUTHORITY"
                 type="text"
                 value={state.idproof.issuingAuthority}
-                onChange={(issuingAuthority) =>
-                  setState({
-                    ...state,
-                    idproof: { ...state.idproof, issuingAuthority },
-                  })
-                }
+                onChange={(issuingAuthority) => {
+                  if (!busy && login.info.loginBy === "ADMIN") {
+                    setState({
+                      ...state,
+                      idproof: { ...state.idproof, issuingAuthority },
+                    })
+                  }
+                }}
               />
             </div>
           </div>
