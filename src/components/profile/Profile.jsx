@@ -44,6 +44,7 @@ const Profile = (props) => {
       bank: "",
       branch: "",
     },
+    active: login.info.active || false,
   })
 
   React.useEffect(() => setError(""), [state])
@@ -108,9 +109,41 @@ const Profile = (props) => {
     )
   }
 
+  const setActive = async (active) => {
+    setBusy(true)
+    confirm.open(
+      <div className="p-2">
+        <div className="text-orange-600 text-center animate-pulse duration-75">
+          <span className="font-extrabold">Warning!</span> This will
+          {active ? "unblock" : "block"} the user.
+        </div>
+        <div className="text-slate-900 text-xl text-center font-extrabold">
+          Are you sure?
+        </div>
+      </div>,
+      async () => {
+        const res2 = await api(
+          active ? "/user/unblock" : "/user/block",
+          new User(state)
+        )
+        if (res2 && res2.docid === state.docid) {
+          setState({ ...state, active })
+          login.setInfo(new User(res2))
+          snackbar.showSuccess("Successfully updated.")
+          setError(false)
+          setBusy(false)
+        }
+      },
+      () => {
+        snackbar.showError("Failed to update.")
+        setBusy(false)
+      }
+    )
+  }
+
   return (
     <>
-      <Form onSubmit={onSubmit}>
+      <Form onSubmit={onSubmit} className={state.active ? "" : "opacity-30"}>
         <div className={style().card()}>
           <div
             className={style(
@@ -139,7 +172,7 @@ const Profile = (props) => {
               />
               <TextBox
                 required
-                disabled={busy}
+                disabled={busy || !state.active}
                 label="Password"
                 type="password"
                 value={state.password}
@@ -147,7 +180,9 @@ const Profile = (props) => {
               />
               <TextBox
                 required
-                disabled={busy || login.info.loginBy !== "ADMIN"}
+                disabled={
+                  busy || !state.active || login.info.loginBy !== "ADMIN"
+                }
                 label="Name"
                 type="text"
                 value={state.name}
@@ -159,7 +194,9 @@ const Profile = (props) => {
               />
               <TextBox
                 required
-                disabled={busy || login.info.loginBy !== "ADMIN"}
+                disabled={
+                  busy || !state.active || login.info.loginBy !== "ADMIN"
+                }
                 label="Email"
                 type="email"
                 value={state.email}
@@ -183,7 +220,9 @@ const Profile = (props) => {
             <div className="p-6">
               <Select
                 required
-                disabled={busy || login.info.loginBy !== "ADMIN"}
+                disabled={
+                  busy || !state.active || login.info.loginBy !== "ADMIN"
+                }
                 label="Live in"
                 type="text"
                 value={state.countrycode}
@@ -213,7 +252,9 @@ const Profile = (props) => {
               </div>
               <TextBox
                 required
-                disabled={busy || login.info.loginBy !== "ADMIN"}
+                disabled={
+                  busy || !state.active || login.info.loginBy !== "ADMIN"
+                }
                 label="Mobile no."
                 type="text"
                 value={state.mobile}
@@ -227,6 +268,7 @@ const Profile = (props) => {
                 required
                 disabled={
                   busy ||
+                  !state.active ||
                   (Boolean(login?.info?.idproof?.name) &&
                     login.info.loginBy !== "ADMIN")
                 }
@@ -243,6 +285,7 @@ const Profile = (props) => {
                 required
                 disabled={
                   busy ||
+                  !state.active ||
                   (Boolean(login?.info?.idproof?.number) &&
                     login.info.loginBy !== "ADMIN")
                 }
@@ -262,6 +305,7 @@ const Profile = (props) => {
                 required
                 disabled={
                   busy ||
+                  !state.active ||
                   (Boolean(login?.info?.idproof?.issuingAuthority) &&
                     login.info.loginBy !== "ADMIN")
                 }
@@ -294,7 +338,7 @@ const Profile = (props) => {
               </div>
               <TextBox
                 required
-                disabled={busy}
+                disabled={busy || !state.active}
                 label="Account Name"
                 type="text"
                 value={state.bankAccount.acName || state.name}
@@ -307,7 +351,7 @@ const Profile = (props) => {
               />
               <TextBox
                 required
-                disabled={busy}
+                disabled={busy || !state.active}
                 label="Account no"
                 type="text"
                 value={state.bankAccount.acNo}
@@ -320,7 +364,7 @@ const Profile = (props) => {
               />
               <TextBox
                 required
-                disabled={busy}
+                disabled={busy || !state.active}
                 label="IFSC"
                 type="text"
                 value={state.bankAccount.ifsc}
@@ -335,7 +379,7 @@ const Profile = (props) => {
             <div className="p-6">
               <TextBox
                 required
-                disabled={busy}
+                disabled={busy || !state.active}
                 label="Bank name"
                 type="text"
                 value={state.bankAccount.bank}
@@ -348,7 +392,7 @@ const Profile = (props) => {
               />
               <TextBox
                 required
-                disabled={busy}
+                disabled={busy || !state.active}
                 label="Branch name"
                 type="text"
                 value={state.bankAccount.branch}
@@ -360,15 +404,40 @@ const Profile = (props) => {
                 }
               />
               <div className="text-red-600 text-center py-4 my-4">{error}</div>
-              <div className="flex justify-center">
+              <div className="flex justify-center gap-4">
                 <Button
-                  disabled={busy}
+                  disabled={busy || !state.active}
                   color="indigo"
                   type="submit"
                   icon="fa fa-save"
                 >
                   Save changes
                 </Button>
+                {login.info.loginBy == "ADMIN" ? (
+                  state.active ? (
+                    <Button
+                      disabled={busy}
+                      color="red"
+                      type="button"
+                      icon="fa fa-lock"
+                      onClick={() => setActive(false)}
+                    >
+                      Block
+                    </Button>
+                  ) : (
+                    <Button
+                      disabled={busy}
+                      color="blue"
+                      type="button"
+                      icon="fa fa-unlock"
+                      onClick={() => setActive(true)}
+                    >
+                      Unblock
+                    </Button>
+                  )
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
           </div>
