@@ -57,7 +57,7 @@ const Profile = (props) => {
     busyPage.set(busy)
   }, [busy])
 
-  const onSubmit = async () => {
+  const onSubmitByUser = async () => {
     setBusy(true)
     confirm.open(
       <div className="p-2">
@@ -108,6 +108,32 @@ const Profile = (props) => {
       }
     )
   }
+  const onSubmitByAdmin = async () => {
+    setBusy(true)
+    confirm.open(
+      <div className="p-2">
+        <div className="text-orange-600 text-center animate-pulse duration-75">
+          <span className="font-extrabold">Warning!</span> This will change your
+          personal data.
+        </div>
+        <div className="text-slate-900 text-xl text-center font-extrabold">
+          Are you sure?
+        </div>
+      </div>,
+      async () => {
+        const res2 = await api("/user/modify", new User(state))
+        if (res2 && res2.docid === state.docid) {
+          snackbar.showSuccess("Successfully updated.")
+          setError(false)
+          setBusy(false)
+        }
+      },
+      () => {
+        snackbar.showError("Failed to update.")
+        setBusy(false)
+      }
+    )
+  }
 
   const setActive = async (active) => {
     setBusy(true)
@@ -143,7 +169,12 @@ const Profile = (props) => {
 
   return (
     <>
-      <Form onSubmit={onSubmit} className={state.active ? "" : "opacity-30"}>
+      <Form
+        onSubmit={
+          login.info.loginBy === "ADMIN" ? onSubmitByAdmin : onSubmitByUser
+        }
+        className={state.active ? "" : "opacity-30"}
+      >
         <div className={style().card()}>
           <div
             className={style(
