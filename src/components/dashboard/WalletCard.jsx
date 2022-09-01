@@ -17,13 +17,15 @@ const WalletCard = (props) => {
       .then((res) => res.json())
       .then((dt) => {
         const today = new Date(dt.datetime)
-        const tym = today.getFullYear() * 12 + today.getMonth()
+        // const tym = today.getFullYear() * 12 + today.getMonth() //! calculating total months
         if (user && user.packages && user.packages.length) {
           let sum = 0
           user.packages.forEach((p) => {
             const pdt = new Date(p.date)
-            const pym = pdt.getFullYear() * 12 + pdt.getMonth()
-            const diff = tym - pym
+            // const pym = pdt.getFullYear() * 12 + pdt.getMonth() //! calculating total month for the package
+            // const diff = tym - pym //! calculating months for the package
+            const diff =
+              ((today.getTime() - pdt.getTime()) / (1000 * 3600 * 24 * 30)) | 0 //? assuming month as 30 days
             sum += p.amount * 0.04 * diff
           })
           setRoi(sum)
