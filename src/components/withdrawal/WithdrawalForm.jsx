@@ -75,48 +75,65 @@ const WithdrawalForm = (props) => {
         </div>
       </div>,
       async () => {
-        // alert('ok')
-        const res = await sendOtp(login.info)
-        if (res) {
-          otpConfirm.open(
-            res.otp,
-            "Please verify the OTP",
-            <div className="p-2">
-              <div className="text-blue-800 text-center">
-                An OTP with request-id{" "}
-                <span className="text-orange-600 font-extrabold">
-                  {res.requestid}
-                </span>{" "}
-                has been sent to {res.email}.
-              </div>
-            </div>,
-            async () => {
-              const withdrawal = new Withdrawal()
-              withdrawal.set(login.info)
-              withdrawal.amount = amount
-              console.log(withdrawal.json())
-              const res2 = await api("/user/withdraw", withdrawal.json())
-              if (res2 && res2.docid === withdrawal.docid) {
-                // withdrawal.set(res2)
-                snackbar.showSuccess("Request sent.")
-                setAmount(0)
-                setError(false)
-                setBusy(false)
-              } else {
-                snackbar.showError("Request failed.")
-                setBusy(false)
-              }
-            },
-            () => {
-              snackbar.showError("Request failed.")
-              setBusy(false)
-            }
-          )
+        const withdrawal = new Withdrawal()
+        withdrawal.set(login.info)
+        withdrawal.amount = amount
+        console.log(withdrawal.json())
+        const res2 = await api("/user/withdraw", withdrawal.json())
+        if (res2 && res2.docid === withdrawal.docid) {
+          // withdrawal.set(res2)
+          snackbar.showSuccess("Request sent.")
+          setAmount(0)
+          setError(false)
+          setBusy(false)
         } else {
-          setError("Failed to send OTP! Please try later.")
+          snackbar.showError("Request failed.")
           setBusy(false)
         }
       },
+      // async () => {
+      //   // alert('ok')
+      //   const res = await sendOtp(login.info)
+      //   if (res) {
+      //     otpConfirm.open(
+      //       res.otp,
+      //       "Please verify the OTP",
+      //       <div className="p-2">
+      //         <div className="text-blue-800 text-center">
+      //           An OTP with request-id{" "}
+      //           <span className="text-orange-600 font-extrabold">
+      //             {res.requestid}
+      //           </span>{" "}
+      //           has been sent to {res.email}.
+      //         </div>
+      //       </div>,
+      //       async () => {
+      //         const withdrawal = new Withdrawal()
+      //         withdrawal.set(login.info)
+      //         withdrawal.amount = amount
+      //         console.log(withdrawal.json())
+      //         const res2 = await api("/user/withdraw", withdrawal.json())
+      //         if (res2 && res2.docid === withdrawal.docid) {
+      //           // withdrawal.set(res2)
+      //           snackbar.showSuccess("Request sent.")
+      //           setAmount(0)
+      //           setError(false)
+      //           setBusy(false)
+      //         } else {
+      //           snackbar.showError("Request failed.")
+      //           setBusy(false)
+      //         }
+      //       },
+      //       () => {
+      //         snackbar.showError("Request failed.")
+      //         setBusy(false)
+      //       }
+      //     )
+      //   } else {
+      //     setError("Failed to send OTP! Please try later.")
+      //     setBusy(false)
+      //   }
+      // },
       () => {
         setBusy(false)
       }
