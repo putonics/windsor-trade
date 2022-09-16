@@ -20,16 +20,16 @@ const Packages = (props) => {
           <PackageView pkg={p} key={"pkg-" + i} />
         ))}
       </div>
-      {login.info.loginBy === "ADMIN" ? (
-        <div className="flex justify-evenly gap-4 mt-4">
-          <PackageItem amount={500} />
-          <PackageItem amount={250} />
-          <PackageItem amount={100} />
-          <PackageItem amount={15} />
-        </div>
-      ) : (
+      {/* {login.info.loginBy === "ADMIN" ? ( */}
+      <div className="flex justify-evenly gap-4 mt-4">
+        <PackageItem amount={500} />
+        <PackageItem amount={250} />
+        <PackageItem amount={100} />
+        <PackageItem amount={15} />
+      </div>
+      {/* ) : (
         <></>
-      )}
+      )} */}
     </div>
   ) : (
     <></>
