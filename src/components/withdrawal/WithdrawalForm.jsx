@@ -82,7 +82,7 @@ const WithdrawalForm = (props) => {
           // withdrawal.set(res2)
           snackbar.showSuccess("Request sent.")
           setAmount(0)
-          setError(false)
+          // setError(false)
           setBusy(false)
         } else {
           snackbar.showError("Request failed.")

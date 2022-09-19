@@ -12,6 +12,7 @@ import AddPackage from "../../components/package/AddPackage"
 import PrivacyPolicies from "../../components/privacy-policies/PrivacyPolicies"
 import TermsAndConditions from "../../components/privacy-policies/TermsAndConditions"
 import WithdrawalForm from "../../components/withdrawal/WithdrawalForm"
+import WindsorWithdrawalForm from "../../components/withdrawal/WindsorWithdrawalForm"
 import Home from "../../components/start/Home"
 import ForgotPassword from "../../components/ForgotPassword"
 export default [
@@ -71,6 +72,11 @@ export default [
   {
     path: "/withdrawal",
     element: <WithdrawalForm />,
+    auth: true,
+  },
+  {
+    path: "/windsor-withdrawal",
+    element: <WindsorWithdrawalForm />,
     auth: true,
   },
   {
