@@ -2,14 +2,12 @@ import React from "react"
 import Button from "../../common/components/Button"
 import Form from "../../common/components/Form"
 import TextBox from "../../common/components/TextBox"
-import { sendOtp } from "../../common/redux/api/Email"
 import { api } from "../../common/redux/classes/CryptoServer"
 import User from "../../common/redux/classes/User"
 import Withdrawal from "../../common/redux/classes/Withdrawal"
 import { useBusyPage } from "../../common/router/BusyPage"
 import { useConfirm } from "../../common/router/Confirm"
 import { useLogin } from "../../common/router/Login"
-import { useOTPConfirm } from "../../common/router/OTPConfirm"
 import { useSnackbar } from "../../common/router/Snackbar"
 import style from "../../common/style"
 
@@ -53,9 +51,9 @@ const WithdrawalForm = (props) => {
   }, [login])
 
   const [busy, setBusy] = React.useState(false)
-  const [error, setError] = React.useState("")
+  // const [error, setError] = React.useState("")
   const confirm = useConfirm()
-  const otpConfirm = useOTPConfirm()
+  // const otpConfirm = useOTPConfirm()
   const busyPage = useBusyPage()
   const snackbar = useSnackbar()
   React.useEffect(() => {
