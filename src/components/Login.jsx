@@ -85,7 +85,7 @@ const Login = (props) => {
               )}
             >
               Windsor Trade
-              <div className="text-sm">Version: 3.6.1</div>
+              <div className="text-sm">Version: 3.7.0</div>
             </div>
             <div className={style("m-6")}>
               <img
